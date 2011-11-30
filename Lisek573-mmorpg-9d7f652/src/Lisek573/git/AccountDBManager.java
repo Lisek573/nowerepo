@@ -90,7 +90,7 @@ public class AccountDBManager {
 			
 			while(rs.next())
 			{
-				Accounts.add(new Account(rs.getString("name"), null, null));
+				Accounts.add(new Account(rs.getString("name"), rs.getString("name"), null));
 			}
 			
 		} catch (SQLException e) {

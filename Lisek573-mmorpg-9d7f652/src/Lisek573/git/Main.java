@@ -23,6 +23,14 @@ public class Main {
 
 		id0001.printAccount();
 		id0001.printCharacter();
+		
+		AccountDBManager db= new AccountDBManager();
+		db.addAccount(id0001);
+
+		for(Account account: db.getAllAccounts())
+		{
+		System.out.println(account.getSurname());
+		}
 	}
 
 	public static Logger getLogger() {
