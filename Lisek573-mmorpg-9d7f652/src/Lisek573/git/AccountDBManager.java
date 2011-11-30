@@ -70,7 +70,7 @@ public class AccountDBManager {
 	public void addAccount(Account p)
 	{
 		try {
-			addAccountStmt.setString(1, p.getName());
+			addAccountStmt.setString(1, p.getSurname());
 			
 			addAccountStmt.executeUpdate();
 			
@@ -90,7 +90,7 @@ public class AccountDBManager {
 			
 			while(rs.next())
 			{
-				Accounts.add(new Account(rs.getString("name")));
+				Accounts.add(new Account(rs.getString("name"), null, null));
 			}
 			
 		} catch (SQLException e) {
