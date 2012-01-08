@@ -14,9 +14,6 @@ import Lisek573.git.Character;
 import Lisek573.git.CharacterJobs.Jobs;
 import Lisek573.git.services.CharacterDBManager;
 
-import com.sklep.services.*;
-import com.sklep.project.*;
-
 public class CharacterDBManagerTest {
 
 	CharacterDBManager cdb = new CharacterDBManager();
