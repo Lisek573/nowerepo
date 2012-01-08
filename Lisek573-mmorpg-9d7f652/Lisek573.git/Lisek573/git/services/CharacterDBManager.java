@@ -122,12 +122,12 @@ public class CharacterDBManager {
 	}
 
 	public List<Character> getAllCharacters() throws java.sql.SQLException {
-		List<Character> products = new ArrayList<Character>();
+		List<Character> characters = new ArrayList<Character>();
 		try {
 			ResultSet rs = getCharacterStmt.executeQuery();
 			while (rs.next()) {
 
-				products.add(new Character(rs.getString("name"), null, rs
+				characters.add(new Character(rs.getString("name"), null, rs
 						.getInt("level"), rs.getFloat("serial")));
 
 			}
@@ -135,7 +135,7 @@ public class CharacterDBManager {
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
 		}
-		return products;
+		return characters;
 	}
 
 	public void printCharacterWithCondition(List<Character> listCharacters,
