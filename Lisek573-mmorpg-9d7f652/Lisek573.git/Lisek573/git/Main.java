@@ -3,9 +3,11 @@ package Lisek573.git;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
 
+
 import Lisek573.git.CharacterJobs.Jobs;
 import Lisek573.git.exception.LevelTooLowException;
 import Lisek573.git.exception.NameCannotBeSameException;
+import Lisek573.git.services.AccountDBManager;
 
 public class Main {
 

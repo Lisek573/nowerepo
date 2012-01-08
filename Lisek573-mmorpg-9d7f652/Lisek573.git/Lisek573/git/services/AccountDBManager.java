@@ -1,4 +1,4 @@
-package Lisek573.git;
+package Lisek573.git.services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,11 +14,11 @@ import Lisek573.git.Account;
 public class AccountDBManager {
 
 	private Connection conn;
-	
 	private Statement stmt;
-	
 	private PreparedStatement addAccountStmt;
-	private PreparedStatement getAccountsStmt;
+	private PreparedStatement getAccountStmt;
+	private PreparedStatement findAccountStmt;
+	public PreparedStatement deleteAccountStmt;
 	
 	
 	public AccountDBManager()
@@ -55,10 +55,15 @@ public class AccountDBManager {
 					"INSERT INTO Account (name) VALUES (?)" +
 					"");
 			
-			getAccountsStmt=conn.prepareStatement("" +
+			getAccountStmt=conn.prepareStatement("" +
 					"SELECT * FROM Account" +
 					"");
 			
+			deleteAccountStmt = conn.prepareStatement("" + "DELETE FROM Account"
+					+ "");
+
+			findAccountStmt = conn
+					.prepareStatement("SELECT id FROM Client WHERE name = ?");
 			
 			
 		} catch (SQLException e) {
@@ -86,7 +91,7 @@ public class AccountDBManager {
 		List<Account> Accounts=new ArrayList<Account>();
 		
 		try {
-			ResultSet rs= getAccountsStmt.executeQuery();
+			ResultSet rs= getAccountStmt.executeQuery();
 			
 			while(rs.next())
 			{
@@ -101,5 +106,37 @@ public class AccountDBManager {
 		return Accounts;
 	}
 	
-	
+	public void clear() throws java.sql.SQLException {
+		ResultSet rs = getAccountStmt.executeQuery();
+		while (rs.next())
+			deleteAccountStmt.executeUpdate();
+
+	}
+
+	public List<Integer> FindAccountByName(String name)
+			throws java.sql.SQLException {
+		try {
+			List<Integer> result = new ArrayList<Integer>();
+			findAccountStmt.setString(1, name);
+			ResultSet rs = findAccountStmt.executeQuery();
+			while (rs.next())
+				result.add(rs.getInt("ID"));
+			return result;
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void deleteAllAccounts()
+	{
+		try 
+		{
+			deleteAccountStmt.executeUpdate();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
 }
