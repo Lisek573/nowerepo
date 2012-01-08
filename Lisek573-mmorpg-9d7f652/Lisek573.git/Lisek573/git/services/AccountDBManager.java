@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Lisek573.git.Account;
+import Lisek573.git.mainthings.Account;
 
 public class AccountDBManager {
 

@@ -2,8 +2,8 @@ package Lisek573.git.events;
 
 import java.util.EventObject;
 
-import Lisek573.git.Account;
-import Lisek573.git.Character;
+import Lisek573.git.mainthings.Account;
+import Lisek573.git.mainthings.Character;
 
 public class CharacterEvent extends EventObject {
 

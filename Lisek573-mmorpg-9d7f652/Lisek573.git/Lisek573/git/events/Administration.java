@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import Lisek573.git.exception.LevelTooLowException;
-import Lisek573.git.Character;
+import Lisek573.git.mainthings.Character;
 
 public class Administration {
 

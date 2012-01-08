@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import Lisek573.git.CharacterJobs;
-import Lisek573.git.Character;
+
+import Lisek573.git.mainthings.Character;
+import Lisek573.git.mainthings.CharacterJobs;
 
 public class CharacterDBManager {
 

@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Lisek573.git.Character;
-import Lisek573.git.CharacterJobs.Jobs;
+import Lisek573.git.mainthings.Character;
+import Lisek573.git.mainthings.CharacterJobs.Jobs;
 import Lisek573.git.services.CharacterDBManager;
 
 public class CharacterDBManagerTest {

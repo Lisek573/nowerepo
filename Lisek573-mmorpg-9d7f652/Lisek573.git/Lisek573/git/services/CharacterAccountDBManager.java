@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
-import Lisek573.git.Character;
+import Lisek573.git.mainthings.Character;
 
 public class CharacterAccountDBManager {
 

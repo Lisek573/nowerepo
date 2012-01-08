@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Lisek573.git.Account;
+import Lisek573.git.mainthings.Account;
 import Lisek573.git.services.AccountDBManager;
 
 public class AccountDBManagerTest {
