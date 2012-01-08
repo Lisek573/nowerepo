@@ -7,12 +7,14 @@ public class Character {
 	String Name;
 	Jobs Job;
 	Integer Level;
+	float Serial;
 	boolean vip;
 
-	public Character(String Name, Jobs Job, Integer Level) {
+	public Character(String Name, Jobs Job, Integer Level, Float Serial) {
 		this.Name = Name;
 		this.Job = Job;
 		this.Level = Level;
+		this.Serial = Serial;
 	}
 
 	public void printCharacter() {
@@ -31,6 +33,10 @@ public class Character {
 	public Integer getLevel() {
 		return Level;
 	}
+	
+	public Float getSerial() {
+		return Serial;
+	}
 
 	public void setName(String Name) {
 		this.Name = Name;
@@ -42,6 +48,10 @@ public class Character {
 
 	public void setLevel(Integer Level) {
 		this.Level = Level;
+	}
+	
+	public void setSerial(Float Serial) {
+		this.Serial = Serial;
 	}
 
 	public void setVip(boolean vip) {

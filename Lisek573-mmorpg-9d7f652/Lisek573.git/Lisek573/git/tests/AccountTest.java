@@ -31,7 +31,7 @@ public class AccountTest {
 
 	@Before
 	public void setUp() throws Exception {
-		id0001.addCharacter(new Character("Lisek", Jobs.Sniper, 94));
+		id0001.addCharacter(new Character("Lisek", Jobs.Sniper, 94, (float) (1)));
 	}
 
 	@After
@@ -43,7 +43,7 @@ public class AccountTest {
 	public void testAccount() throws LevelTooLowException,
 			NameCannotBeSameException {
 		Account id0002 = new Account("lisek5734", "Tomaszewskii", 0002);
-		id0002.addCharacter(new Character("Lisek", Jobs.Sniper, 94));
+		id0002.addCharacter(new Character("Lisek", Jobs.Sniper, 94, (float)1));
 		assertTrue(Account.getCharaList().size() == 1);
 		assertTrue(id0002.getLogin().equals("lisek5734"));
 	}
@@ -100,7 +100,7 @@ public class AccountTest {
 	@Test
 	public void testSetCharaList() {
 		List<Character> list = new ArrayList<Character>();
-		list.add(new Character("Lisek", Jobs.Sniper, 94));
+		list.add(new Character("Lisek", Jobs.Sniper, 94, (float)1));
 		id0001.setCharaList(list);
 		assertTrue(list.size() == 1);
 	}

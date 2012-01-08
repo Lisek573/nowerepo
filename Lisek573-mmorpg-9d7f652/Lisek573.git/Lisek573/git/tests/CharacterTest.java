@@ -26,7 +26,7 @@ public class CharacterTest {
 
 	@Before
 	public void setUp() throws Exception {
-		id0001.addCharacter(new Character("Lisek", Jobs.Sniper, 94));
+		id0001.addCharacter(new Character("Lisek", Jobs.Sniper, 94, (float)1));
 	}
 
 	@After
