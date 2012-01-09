@@ -10,18 +10,18 @@ public class CharacterAccountDBManager {
 
 	private Connection conn;
 	private Statement stmt;
-	private PreparedStatement addProductToClientStmt;
-	private PreparedStatement deleteAllClientProductStmt;
-	private PreparedStatement deleteAllProductFromClientStmt;
-	private PreparedStatement getProductClientStmt;
+	private PreparedStatement addCharacterToAccountStmt;
+	private PreparedStatement deleteAllAccountCharacterStmt;
+	private PreparedStatement deleteAllCharacterFromAccountStmt;
+	private PreparedStatement getCharacterAccountStmt;
 
-	public CharacterAccountDBManager() throws java.sql.SQLException {
+	public CharacterAccountDBManager() {
 		try {
 			Properties props = new Properties();
 
 			try {
 				props.load(ClassLoader
-						.getSystemResourceAsStream("com/sklep/jdbc.properties"));
+						.getSystemResourceAsStream("Lisek573/git/services/jdbc.properties"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -29,32 +29,32 @@ public class CharacterAccountDBManager {
 			conn = DriverManager.getConnection(props.getProperty("url"));
 
 			stmt = conn.createStatement();
-			boolean clientTableExists = false;
+			boolean accountTableExists = false;
 
 			ResultSet rs = conn.getMetaData().getTables(null, null, null, null);
 
 			while (rs.next()) {
 				if ("CharacterAccount".equalsIgnoreCase(rs.getString("TABLE_NAME"))) {
-					clientTableExists = true;
+					accountTableExists = true;
 					break;
 				}
 			}
 
-			if (!clientTableExists) {
-				stmt.executeUpdate("CREATE TABLE characterAccount(account_id int, product_id int, CONSTRAINT client_id_fk FOREIGN KEY (client_id) REFERENCES client (id), CONSTRAINT character_id_fk FOREIGN KEY (product_id) REFERENCES product (id))");
+			if (!accountTableExists) {
+				stmt.executeUpdate("CREATE TABLE characterAccount(account_id int, character_id int, CONSTRAINT account_id_fk FOREIGN KEY (account_id) REFERENCES account (id), CONSTRAINT character_id_fk FOREIGN KEY (character_id) REFERENCES character (id))");
 			}
 
-			addProductToClientStmt = conn
-					.prepareStatement("INSERT INTO characterAccount (client_id, product_id) VALUES (?, ?)");
+			addCharacterToAccountStmt = conn
+					.prepareStatement("INSERT INTO characterAccount (account_id, character_id) VALUES (?, ?)");
 
-			deleteAllClientProductStmt = conn
-					.prepareStatement("DELETE FROM characterAccount WHERE client_id = ?");
+			deleteAllAccountCharacterStmt = conn
+					.prepareStatement("DELETE FROM characterAccount WHERE account_id = ?");
 
-			deleteAllProductFromClientStmt = conn
+			deleteAllCharacterFromAccountStmt = conn
 					.prepareStatement("DELETE FROM characterAccount");
 
-			getProductClientStmt = conn
-					.prepareStatement("SELECT Character.name,Character.level,Character.serial FROM Character, ClientProduct WHERE client_id = ? and product_id = Product.id");
+			getCharacterAccountStmt = conn
+					.prepareStatement("SELECT Character.name,Character.level,Character.serial FROM Character, AccountCharacter WHERE account_id = ? and character_id = Character.id");
 
 		} catch (java.sql.SQLException e) {
 
@@ -62,14 +62,14 @@ public class CharacterAccountDBManager {
 		}
 	}
 
-	public void addProductToClient(List<Integer> listClientId,
-			List<Integer> listProductId) throws java.sql.SQLException {
+	public void addCharacterToAccount(List<Integer> listAccountId,
+			List<Integer> listCharacterId) throws java.sql.SQLException {
 		try {
-			for (Integer clientID : listClientId) {
-				for (Integer productID : listProductId) {
-					addProductToClientStmt.setInt(1, clientID);
-					addProductToClientStmt.setInt(2, productID);
-					addProductToClientStmt.executeUpdate();
+			for (Integer accountID : listAccountId) {
+				for (Integer characterID : listCharacterId) {
+					addCharacterToAccountStmt.setInt(1, accountID);
+					addCharacterToAccountStmt.setInt(2, characterID);
+					addCharacterToAccountStmt.executeUpdate();
 				}
 			}
 		} catch (java.sql.SQLException e) {
@@ -79,11 +79,11 @@ public class CharacterAccountDBManager {
 
 	}
 
-	public void deleteAllClientProduct(List<Integer> listClientId) throws java.sql.SQLException {
+	public void deleteAllAccountCharacter(List<Integer> listAccountId) throws java.sql.SQLException {
 		try {
-			for (Integer clientID : listClientId) {
-				deleteAllClientProductStmt.setInt(1, clientID);
-				deleteAllClientProductStmt.executeUpdate();
+			for (Integer accountID : listAccountId) {
+				deleteAllAccountCharacterStmt.setInt(1, accountID);
+				deleteAllAccountCharacterStmt.executeUpdate();
 			}
 		} catch (java.sql.SQLException e) {
 
@@ -92,9 +92,9 @@ public class CharacterAccountDBManager {
 
 	}
 
-	public void deleteAllProductFromClient() throws java.sql.SQLException {
+	public void deleteAllCharacterFromAccount() throws java.sql.SQLException {
 		try {
-			deleteAllProductFromClientStmt.executeUpdate();
+			deleteAllCharacterFromAccountStmt.executeUpdate();
 		} catch (java.sql.SQLException e) {
 
 			e.printStackTrace();
@@ -102,12 +102,12 @@ public class CharacterAccountDBManager {
 
 	}
 
-	public List<Character> getClientProduct(List<Integer> listClientId) throws java.sql.SQLException {
+	public List<Character> getAccountCharacter(List<Integer> listAccountId) throws java.sql.SQLException {
 		List<Character> Characters = new ArrayList<Character>();
 		try {
-			for (Integer clientID : listClientId) {
-				getProductClientStmt.setInt(1, clientID);
-				ResultSet rs = getProductClientStmt.executeQuery();
+			for (Integer accountID : listAccountId) {
+				getCharacterAccountStmt.setInt(1, accountID);
+				ResultSet rs = getCharacterAccountStmt.executeQuery();
 				while (rs.next()) {
 				
 							
