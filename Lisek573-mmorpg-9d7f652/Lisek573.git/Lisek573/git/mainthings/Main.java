@@ -46,7 +46,7 @@ public class Main {
 		for (Account account : db.getAllAccounts()) {
 			System.out.println(account.getSurname());
 		}
-	}
+}
 
 	public static Logger getLogger() {
 		return logger;
