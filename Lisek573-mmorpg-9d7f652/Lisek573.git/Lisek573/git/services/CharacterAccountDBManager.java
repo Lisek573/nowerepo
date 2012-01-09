@@ -11,7 +11,7 @@ public class CharacterAccountDBManager {
 	private Connection conn;
 	private Statement stmt;
 	private PreparedStatement addCharacterToAccountStmt;
-	private PreparedStatement deleteAllAccountCharacterStmt;
+	private PreparedStatement deleteAllCharacterAccountStmt;
 	private PreparedStatement deleteAllCharacterFromAccountStmt;
 	private PreparedStatement getCharacterAccountStmt;
 
@@ -41,20 +41,20 @@ public class CharacterAccountDBManager {
 			}
 
 			if (!accountTableExists) {
-				stmt.executeUpdate("CREATE TABLE characterAccount(account_id int, character_id int, CONSTRAINT account_id_fk FOREIGN KEY (account_id) REFERENCES account (id), CONSTRAINT character_id_fk FOREIGN KEY (character_id) REFERENCES character (id))");
+				stmt.executeUpdate("CREATE TABLE characterAccount(account_id int, character_id int, CONSTRAINT account_id_fk FOREIGN KEY (account_id) REFERENCES Account (id), CONSTRAINT character_id_fk FOREIGN KEY (character_id) REFERENCES Character (id))");
 			}
 
 			addCharacterToAccountStmt = conn
 					.prepareStatement("INSERT INTO characterAccount (account_id, character_id) VALUES (?, ?)");
 
-			deleteAllAccountCharacterStmt = conn
+			deleteAllCharacterAccountStmt = conn
 					.prepareStatement("DELETE FROM characterAccount WHERE account_id = ?");
 
 			deleteAllCharacterFromAccountStmt = conn
 					.prepareStatement("DELETE FROM characterAccount");
 
 			getCharacterAccountStmt = conn
-					.prepareStatement("SELECT Character.name,Character.level,Character.serial FROM Character, AccountCharacter WHERE account_id = ? and character_id = Character.id");
+					.prepareStatement("SELECT Character.name,Character.level,Character.serial FROM Character, CharacterAccount WHERE account_id = ? and character_id = Character.id");
 
 		} catch (java.sql.SQLException e) {
 
@@ -79,11 +79,11 @@ public class CharacterAccountDBManager {
 
 	}
 
-	public void deleteAllAccountCharacter(List<Integer> listAccountId) throws java.sql.SQLException {
+	public void deleteAllCharacterAccount(List<Integer> listAccountId) throws java.sql.SQLException {
 		try {
 			for (Integer accountID : listAccountId) {
-				deleteAllAccountCharacterStmt.setInt(1, accountID);
-				deleteAllAccountCharacterStmt.executeUpdate();
+				deleteAllCharacterAccountStmt.setInt(1, accountID);
+				deleteAllCharacterAccountStmt.executeUpdate();
 			}
 		} catch (java.sql.SQLException e) {
 
@@ -102,7 +102,7 @@ public class CharacterAccountDBManager {
 
 	}
 
-	public List<Character> getAccountCharacter(List<Integer> listAccountId) throws java.sql.SQLException {
+	public List<Character> getCharacterAccount(List<Integer> listAccountId) throws java.sql.SQLException {
 		List<Character> Characters = new ArrayList<Character>();
 		try {
 			for (Integer accountID : listAccountId) {

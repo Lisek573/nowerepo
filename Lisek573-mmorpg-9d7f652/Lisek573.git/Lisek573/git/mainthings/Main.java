@@ -9,6 +9,7 @@ import Lisek573.git.exception.LevelTooLowException;
 import Lisek573.git.exception.NameCannotBeSameException;
 import Lisek573.git.mainthings.CharacterJobs.Jobs;
 import Lisek573.git.services.AccountDBManager;
+import Lisek573.git.services.CharacterAccountDBManager;
 import Lisek573.git.services.CharacterDBManager;
 
 public class Main {
@@ -42,10 +43,13 @@ public class Main {
 		cdb.addCharacter(cha0001);
 		cdb.addCharacter(cha0002);
 		cdb.addCharacter(cha0003);
+		
+		CharacterAccountDBManager cadb = new CharacterAccountDBManager();
 
-		for (Account account : db.getAllAccounts()) {
-			System.out.println(account.getSurname());
-		}
+		cadb.addCharacterToAccount(db.FindAccountByName(id0001.getSurname()),
+		cdb.findCharacterByName("Skybird"));
+		cadb.addCharacterToAccount(db.FindAccountByName(id0001.getSurname()),
+		cdb.findCharacterByName("Lisek"));
 }
 
 	public static Logger getLogger() {

@@ -15,7 +15,7 @@ import Lisek573.git.services.AccountDBManager;
 
 public class AccountDBManagerTest {
 
-	AccountDBManager cdb = new AccountDBManager();
+	AccountDBManager adb = new AccountDBManager();
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -30,43 +30,43 @@ public class AccountDBManagerTest {
 
 	@After
 	public void tearDown() throws Exception {
-		cdb.deleteAllAccounts();
+		adb.deleteAllAccounts();
 	}
 
 
 	@Test
 	public void testAddAccount() throws SQLException {
-		cdb.addAccount(new Account("ABC", null, null));
-		assertEquals(1, cdb.getAllAccounts().size());
+		adb.addAccount(new Account("ABC", null, null));
+		assertEquals(1, adb.getAllAccounts().size());
 	}
 
 	@Test
 	public void testGetAllAccounts() throws SQLException {
-		cdb.addAccount(new Account("DEF", null, null));
-		cdb.addAccount(new Account("GHI", null, null));
-		cdb.addAccount(new Account("JKM", null, null));
-		assertEquals(3, cdb.getAllAccounts().size());
+		adb.addAccount(new Account("DEF", null, null));
+		adb.addAccount(new Account("GHI", null, null));
+		adb.addAccount(new Account("JKM", null, null));
+		assertEquals(3, adb.getAllAccounts().size());
 	}
 	
 	@Test
 	public void testclear() throws SQLException {
-		cdb.clear();
-		assertEquals(0, cdb.getAllAccounts().size());
+		adb.clear();
+		assertEquals(0, adb.getAllAccounts().size());
 	}
 
 	@Test
 	public void testFindAccountByName() throws SQLException {
-		cdb.addAccount(new Account("ABC", null, null));
-		assertEquals(1, cdb.FindAccountByName("ABC").size());
-		assertTrue(cdb.FindAccountByName("ABC").size() == 1);
+		adb.addAccount(new Account("ABC", "ABC", 1));
+		assertEquals(1, adb.FindAccountByName("ABC").size());
+		assertTrue(adb.FindAccountByName("ABC").size() == 1);
 	}
 	@Test
 	public void testdeleteAllAccounts() throws SQLException 
 	{
-		cdb.addAccount(new Account("MML", null, null));
-		cdb.addAccount(new Account("MML", null, null));
-		cdb.deleteAllAccounts();
-		assertEquals(0, cdb.getAllAccounts().size());
+		adb.addAccount(new Account("ABC", "ABC", 1));
+		adb.addAccount(new Account("ABD", "ABD", 2));
+		adb.deleteAllAccounts();
+		assertEquals(0, adb.getAllAccounts().size());
 	}
 
 

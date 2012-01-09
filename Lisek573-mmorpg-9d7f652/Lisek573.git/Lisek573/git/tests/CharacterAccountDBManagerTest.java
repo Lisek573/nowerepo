@@ -44,41 +44,40 @@ public class CharacterAccountDBManagerTest {
 
 	@Test
 	public void testAddCharacterToAccount() throws SQLException {
-		adb.addAccount(new Account("ABC", "1", 1));
+		adb.addAccount(new Account("ABC", "ABC", 1));
 		cdb.addCharacter(new Character("Lisek", Jobs.Sniper, 55, (float)1));
-		cadb.addCharacterToAccount(adb.FindAccountByName("MM"), cdb.findCharacterBySerial((float)1));
-		assertEquals(1, cadb.getAccountCharacter(adb.FindAccountByName("MM")).size());
+		cadb.addCharacterToAccount(adb.FindAccountByName("ABC"), cdb.findCharacterBySerial((float)1));
+		assertEquals(1, cadb.getCharacterAccount(adb.FindAccountByName("ABC")).size());
 	}
 
 	@Test
-	public void testDeleteAllAccountCharacter() throws SQLException{
+	public void testDeleteAllCharacterAccount() throws SQLException{
 		adb.addAccount(new Account("ABC", "1", 1));
-		adb.addAccount(new Account("ABC", "1", 1));
+		adb.addAccount(new Account("ABCD", "1", 1));
 		cdb.addCharacter(new Character("Lisek", Jobs.Sniper, 55, (float)1));
 		cadb.addCharacterToAccount(adb.FindAccountByName("ABC"), cdb.findCharacterBySerial((float)1));
-		cadb.addCharacterToAccount(adb.FindAccountByName("MML"), cdb.findCharacterBySerial((float)1));
-		cadb.addCharacterToAccount(adb.FindAccountByName("MM"), cdb.findCharacterBySerial((float)1));
-		cadb.deleteAllAccountCharacter(adb.FindAccountByName("MM"));
-		cadb.deleteAllAccountCharacter(adb.FindAccountByName("MML"));
-		assertTrue(cadb.getAccountCharacter(adb.FindAccountByName("MM")).size() == 0);
-		assertTrue(cadb.getAccountCharacter(adb.FindAccountByName("MML")).size() == 0);
+		cadb.addCharacterToAccount(adb.FindAccountByName("ABCD"), cdb.findCharacterBySerial((float)1));
+		cadb.deleteAllCharacterAccount(adb.FindAccountByName("ABC"));
+		cadb.deleteAllCharacterAccount(adb.FindAccountByName("ABCD"));
+		assertTrue(cadb.getCharacterAccount(adb.FindAccountByName("ABC")).size() == 0);
+		assertTrue(cadb.getCharacterAccount(adb.FindAccountByName("ABCD")).size() == 0);
 	}
 
 	@Test
 	public void testDeleteAllCharacterFromAccount() throws SQLException{
 		adb.addAccount(new Account("ABC", "1", 1));
 		cdb.addCharacter(new Character("Lisek", Jobs.Sniper, 55, (float)1));
-		cadb.addCharacterToAccount(adb.FindAccountByName("MM"), cdb.findCharacterBySerial((float)1));
+		cadb.addCharacterToAccount(adb.FindAccountByName("ABC"), cdb.findCharacterBySerial((float)1));
 		cadb.deleteAllCharacterFromAccount();
-		assertTrue(cadb.getAccountCharacter(adb.FindAccountByName("MM")).size() == 0);
+		assertTrue(cadb.getCharacterAccount(adb.FindAccountByName("ABC")).size() == 0);
 	}
 
 	@Test
-	public void testGetAccountCharacter() throws SQLException{
-		adb.addAccount(new Account("ABC", "1", 1));
+	public void testGetCharacterAccount() throws SQLException{
+		adb.addAccount(new Account("ABC", "ABC", 1));
 		cdb.addCharacter(new Character("Lisek", Jobs.Sniper, 55, (float)1));
-		cadb.addCharacterToAccount(adb.FindAccountByName("MM"), cdb.findCharacterBySerial((float)1));
-		assertEquals(1, cadb.getAccountCharacter(adb.FindAccountByName("MM")).size());
+		cadb.addCharacterToAccount(adb.FindAccountByName("ABC"), cdb.findCharacterBySerial((float)1));
+		assertEquals(1, cadb.getCharacterAccount(adb.FindAccountByName("ABC")).size());
 	}
 
 }

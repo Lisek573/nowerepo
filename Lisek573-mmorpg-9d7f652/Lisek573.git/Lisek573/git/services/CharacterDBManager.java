@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Lisek573.git.mainthings.Character;
-import Lisek573.git.mainthings.CharacterJobs;
 
 public class CharacterDBManager {
 
@@ -92,11 +91,11 @@ public class CharacterDBManager {
 		dropCharacterStmt.executeUpdate();
 	}
 
-	public List<Integer> findCharacterByName(CharacterJobs Job)
+	public List<Integer> findCharacterByName(String Name)
 			throws java.sql.SQLException {
 		try {
 			List<Integer> result = new ArrayList<Integer>();
-			findCharacterByNameStmt.setString(1, Job.toString());
+			findCharacterByNameStmt.setString(1, Name.toString());
 			ResultSet rs = findCharacterByNameStmt.executeQuery();
 			while (rs.next())
 				result.add(rs.getInt("ID"));
