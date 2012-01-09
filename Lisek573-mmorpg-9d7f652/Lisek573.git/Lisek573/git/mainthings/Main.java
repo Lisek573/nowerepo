@@ -32,24 +32,34 @@ public class Main {
 				(float) 3));
 		Character cha0003 = (new Character("Rorona Frixell", Jobs.Alchemist,
 				64, (float) 3));
+		
+		Account id0002 = new Account("nusiak", "Olkiewicz", 0002);
+		Character cha6812 = (new Character("ChitChara", Jobs.Priest, 22,
+				(float) 2));
 
 		id0001.printAccount();
 		id0001.printCharacter();
 
 		AccountDBManager db = new AccountDBManager();
 		db.addAccount(id0001);
+		db.addAccount(id0002);
 
 		CharacterDBManager cdb = new CharacterDBManager();
 		cdb.addCharacter(cha0001);
 		cdb.addCharacter(cha0002);
 		cdb.addCharacter(cha0003);
+		cdb.addCharacter(cha6812);
 		
 		CharacterAccountDBManager cadb = new CharacterAccountDBManager();
 
 		cadb.addCharacterToAccount(db.FindAccountByName(id0001.getSurname()),
+		cdb.findCharacterByName("Lisek"));
+		cadb.addCharacterToAccount(db.FindAccountByName(id0001.getSurname()),
 		cdb.findCharacterByName("Skybird"));
 		cadb.addCharacterToAccount(db.FindAccountByName(id0001.getSurname()),
-		cdb.findCharacterByName("Lisek"));
+		cdb.findCharacterByName("Rorona Frixell"));
+		cadb.addCharacterToAccount(db.FindAccountByName(id0002.getSurname()),
+		cdb.findCharacterByName("ChitChara"));
 }
 
 	public static Logger getLogger() {
